@@ -46,12 +46,15 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const userIsOnboarding = true; // or false
   const colorScheme = useColorScheme();
+
   return (
-    <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-      <Stack>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <Stack initialRouteName={userIsOnboarding ? "(auth)/welcome" : "(tabs)"}  screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(auth)/welcome" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
   );
